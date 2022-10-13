@@ -8,48 +8,104 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</head>
-<body>
+  <style>
+    h2 {
+      background-color:rgb(143, 227, 255);
+       font-family: 'Times New Roman', Times, serif;
+       font-weight: bold;
+       padding: 20px;
+       margin: 0px 190px;
+       margin-bottom: 20px;
+       text-align:center;
+    }
+    #target {
+        background-color: rgba(33, 215, 106, 0.941);
+        font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        font-weight: 900;
+        font-size: 16px;
+        margin: 6px;
+    }
+    #countdown {
+        background-color: rgb(247, 100, 105);
+        font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        font-weight: 700;
+        font-size: 16px;
+        margin: 4px;
 
-  <h2>Nikitha Vedant Madabhushi Reaction Timer</h2>
-  <div class="row menu">
-    <div class="col-md">
-        <p id="target">Your time</p>
-    </div>
-    <div class="col-md">
-        <p id="countdown">Count</p>
-    </div>
-</div>
-<div class="container">
-    <button class="btn btn-warning" type="submit" onclick="startTime()">Start Timer</button>
-    <button class="btn btn-danger" type="submit" onclick="recordReact()">React Now</button>
-</div>
-</div>
-
-<script>
-var myTime = Date.now()
-
-function recordReact() {
-    myTime = Date.now()
-    console.log(myTime)
-}
-function startTime() {
-            for(let i = 0; i < 4; i++) {
-                setTimeout(() => {
-                    document.getElementById("countdown").innerHTML = i
-                }, ((3-i)*1000));
+    }
+    button {
+        margin: 15px;
+    }
+    .row menu {
+                background-color: #e120e171;
+                padding: 10px;
+                text-align: left;
+                width: 400px;
+                margin-left: 200px;
+                text-align: center;
             }
-            
-            setTimeout(() => {
-                if(myTime == undefined) {
-                    document.getElementById("target").innerHTML = "Too Slow"
-                } else {
-                    let buttonTime = Date.now()
-                    document.getElementById("target").innerHTML = "Time was " + (buttonTime - myTime)
-                }
-            }, 3000);
-        }
-    </script>
+</style>
+</head>
+<body style="background-color:ligthor">
 
+  <h2 style="color:crimson">Nikitha Vedant Madabhushi Reaction Timer</h2>
+
+  <div class="row menu" style="background-color: rgb(206, 135, 135); margin: 0px 100px;">
+    <div class="col-md" style="text-align:center">
+        <p id="target" style="margin: 15px 100px;" >Your time</p>
+    </div>
+    <div class="col-md" style="text-align:center">
+        <p id="countdown" style="margin: 15px 100px;">Count</p>
+    </div>
+</div>
+<div class="container text-center">
+    <button class="btn btn-warning" type="submit" onclick="startTime()">Start Timer</button>
+    <button class="btn btn-danger"  type="submit" onclick="recordReact()">React Now</button>
+</div>
+</div>
+
+<script> 
+    var countdown = document.getElementById("countdown")
+    var target = document.getElementById("target")
+  
+    let myTime = undefined
+    let buttonTime = undefined
+    let elapsedTime = undefined
+  
+    function startTime()
+    {
+      var randTimer = Math.floor(Math.random()*9)+2 
+  
+      myTime = undefined 
+      for(let i=0;i<=randTimer;i++)
+      {
+        setTimeout(() => {
+          countdown.innerHTML = "Count: " + i
+       
+        }, 
+          ((randTimer-i)*1000)
+        );
+        
+      }
+      setTimeout(function() {
+        if (myTime === undefined) {
+          target.innerHTML = "Too Slow"
+        } else {
+          buttonTime = Date.now()
+          elapsedTime = -(myTime - buttonTime)
+          target.innerHTML = "Time was " + elapsedTime + "ms"
+        }
+      }, randTimer*1000)
+  
+  
+    }
+  
+    function recordReact()
+    {
+      myTime = Date.now()
+      console.log("Start time: " + myTime)
+  
+    }
+    </script>
 </body>
 </html>
